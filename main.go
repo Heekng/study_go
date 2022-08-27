@@ -1,16 +1,33 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
+
+func multiply(a, b int) int {
+	return a * b
+}
+
+func lenAndUpper(name string) (int, string) {
+	return len(name), strings.ToUpper(name)
+}
+
+func repeatMe(words ...string) {
+	fmt.Println(words)
+}
 
 func main() {
-	//상수
-	//const name string = "heekng"
-	//fmt.Println(name)
+	//fmt.Println(multiply(2, 2))
 
-	//var name string = "heekng"
-	// 이렇게 작성하면 var, type을 자동 설정해준다.
-	// 축약형은 func 안에서만 사용 가능
-	name := "heekng"
-	name = "heekng2"
-	fmt.Println(name)
+	// go 는 한번도 사용하지 않는 변수, 상수에 대해 에러를 나타낸다.
+	//totalLength, upperName := lenAndUpper("heekng")
+	//fmt.Println(totalLength, upperName)
+
+	//아래와 같이 리턴값의 개수를 조절할 수 있다.
+	//totalLength, _ := lenAndUpper("heekng")
+	//fmt.Println(totalLength)
+
+	// 다중
+	repeatMe("h", "e", "e", "k", "n", "g")
 }
