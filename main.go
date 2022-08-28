@@ -3,16 +3,14 @@ package main
 import "fmt"
 
 func main() {
-	//array
-	//names := [5]string{"h", "e", "e"}
-	//names[3] = "k"
-	//names[4] = "n"
-	//fmt.Println(names)
+	//map[key]value
+	//heekng := map[string]string{"name": "heekng", "age": "28"}
+	//fmt.Println(heekng)
 
-	//slice
-	names := []string{"h", "e", "e"}
-	names = append(names, "k")
-	names = append(names, "n")
-	names = append(names, "g")
-	fmt.Println(names)
+	//map[key]value
+	heekng := map[string]string{"name": "heekng", "age": "28"}
+	fmt.Println(heekng)
+	for key, value := range heekng {
+		fmt.Println(key, value)
+	}
 }
