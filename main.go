@@ -2,15 +2,21 @@ package main
 
 import "fmt"
 
-func main() {
-	//map[key]value
-	//heekng := map[string]string{"name": "heekng", "age": "28"}
-	//fmt.Println(heekng)
+// struct: like object
+type person struct {
+	name    string
+	age     int
+	favFood []string
+}
 
-	//map[key]value
-	heekng := map[string]string{"name": "heekng", "age": "28"}
-	fmt.Println(heekng)
-	for key, value := range heekng {
-		fmt.Println(key, value)
+func main() {
+	favFood := []string{"kimchi", "ramen"}
+	//heekng := person{"heekng", 28, favFood}
+	heekng := person{
+		name:    "heekng",
+		age:     28,
+		favFood: favFood,
 	}
+	fmt.Println(heekng)
+	fmt.Println(heekng.name)
 }
