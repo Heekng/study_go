@@ -3,18 +3,16 @@ package main
 import "fmt"
 
 func main() {
-	//a := 2
-	//b := a
-	//a = 10
-	//fmt.Println(a, b)
-	// 주소값을 확인
-	//fmt.Println(&a, &b)
+	//array
+	//names := [5]string{"h", "e", "e"}
+	//names[3] = "k"
+	//names[4] = "n"
+	//fmt.Println(names)
 
-	a := 2
-	b := &a
-	a = 5
-	// *: 살펴본다, 훑어본다., 메모리에 할당된 값을 확인한다.
-	*b = 20
-	fmt.Println(*b)
-	fmt.Println(a)
+	//slice
+	names := []string{"h", "e", "e"}
+	names = append(names, "k")
+	names = append(names, "n")
+	names = append(names, "g")
+	fmt.Println(names)
 }
