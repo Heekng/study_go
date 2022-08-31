@@ -1,37 +1,53 @@
 package main
 
 import (
+	"errors"
 	"fmt"
-	"time"
+	"net/http"
 )
 
+type requestResult struct {
+	url    string
+	status string
+}
+
+var errRequestFailed = errors.New("Request failed")
+
 func main() {
-	c := make(chan string)
-	people := [4]string{"hee", "kng", "test1", "test2"}
-	for _, person := range people {
-		go isCool(person, c)
+	results := make(map[string]string)
+	c := make(chan requestResult)
+	urls := []string{
+		"https://www.airbnb.com/",
+		"https://www.google.com/",
+		"https://www.amazon.com/",
+		"https://www.reddit.com/",
+		"https://www.google.com/",
+		"https://soundcloud.com/",
+		"https://www.facebook.com/",
+		"https://www.instagram.com/",
+		"https://academy.nomadcoders.co/",
 	}
-	fmt.Println("Waiting for messages")
-	//resultOne := <-c
-	//resultTwo := <-c
-	//resultThree := <-c
-	for i := 0; i < len(people); i++ {
-		fmt.Print("waiting for", i)
-		fmt.Println(<-c)
+
+	for _, url := range urls {
+		go hitURL(url, c)
 	}
-	//fmt.Println("Received this message: " + resultOne)
-	//fmt.Println("Received this message: " + resultTwo)
-	//fmt.Println("Received this message: " + resultThree)
+	for i := 0; i < len(urls); i++ {
+		result := <-c
+		results[result.url] = result.status
+	}
+
+	for url, status := range results {
+		fmt.Println(url, status)
+	}
+
 }
 
-func coolCount(person string) {
-	for i := 0; i < 10; i++ {
-		fmt.Println(person, "is cool", i)
-		time.Sleep(time.Second)
+func hitURL(url string, c chan<- requestResult) { // c chan<- sendOnly
+	fmt.Println("Checking:", url)
+	resp, err := http.Get(url)
+	status := "OK"
+	if err != nil || resp.StatusCode >= 400 {
+		status = "FAILED"
 	}
-}
-
-func isCool(person string, c chan string) {
-	time.Sleep(time.Second * 10)
-	c <- person + " is cool"
+	c <- requestResult{url: url, status: status}
 }
